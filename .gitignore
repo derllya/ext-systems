@@ -4,3 +4,4 @@ out
 .idea/
 /shelf/
 /workspace.xml
+*.iml
