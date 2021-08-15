@@ -4,25 +4,50 @@ import edu.javacourse.city.domain.PersonRequest;
 import edu.javacourse.city.domain.PersonResponse;
 import edu.javacourse.city.exeption.PersonCheckException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class PersonCheckDao {
-    private static final String SQL_REQUEST = "select temporal from cr_address_person ap" +
-            "inner join cr_person pers on ap.person_id = pers.person_id" +
-            "inner join cr_address adr on ap.address_id = adr.address_id" +
-            "where upper(pers.sur_name) = upper(?) and upper(pers.given_name) = upper(?) and" +
-            "upper(pers.patronymic) = upper(?) and pers.date_of_birth = ? and" +
-            "adr.street_code = ? and upper(adr.building) = upper(?) and upper(adr.extension) = upper(?)" +
-            "and upper(adr.apartment) = upper(?);";
+    private static final String SQL_REQUEST = "select temporal from cr_address_person ap " +
+            "inner join cr_person pers on ap.person_id = pers.person_id " +
+            "inner join cr_address adr on ap.address_id = adr.address_id " +
+            "where CURRENT_DATE >= ap.start_date and (CURRENT_DATE <= ap.end_date or ap.end_date is null) " +
+            "and upper(pers.sur_name) = upper(?) and upper(pers.given_name) = upper(?) and " +
+            "upper(pers.patronymic) = upper(?) and pers.date_of_birth = ? and " +
+            "adr.street_code = ? and upper(adr.building) = upper(?) ";
 
     public PersonResponse checkPerson(PersonRequest personRequest) throws PersonCheckException {
         PersonResponse personResponse = new PersonResponse();
 
+        String sql = SQL_REQUEST;
+
+        if (personRequest.getExtension() != null){
+            sql += "and upper(adr.extension) = upper(?) ";
+        }
+        else {
+            sql += "and adr.extension is null ";
+        }
+        if (personRequest.getApartment() != null){
+            sql += "and upper(adr.apartment) = upper(?) ";
+        }
+        else {
+            sql += "and adr.apartment is null ";
+        }
+
         try(Connection connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_REQUEST)){
+            PreparedStatement statement = connection.prepareStatement(sql)){
+            int count = 1;
+            statement.setString(count++,personRequest.getSurname());
+            statement.setString(count++,personRequest.getName());
+            statement.setString(count++,personRequest.getPatronymic());
+            statement.setDate(count++, java.sql.Date.valueOf(personRequest.getBirthDay()));
+            statement.setInt(count++, personRequest.getStreetCode());
+            statement.setString(count++, personRequest.getBuilding());
+            if (personRequest.getExtension() != null) {
+                statement.setString(count++, personRequest.getExtension());
+            }
+            if (personRequest.getApartment() != null) {
+                statement.setString(count++, personRequest.getApartment());
+            }
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
@@ -37,7 +62,7 @@ public class PersonCheckDao {
         return personResponse;
     }
 
-    private Connection getConnection() {
-        return null;
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/city_register","postgres", "developer");
     }
 }
