@@ -15,6 +15,12 @@ public class PersonCheckDao {
             "upper(pers.patronymic) = upper(?) and pers.date_of_birth = ? and " +
             "adr.street_code = ? and upper(adr.building) = upper(?) ";
 
+    private ConnectionBuilder connectionBuilder;
+
+    public void setConnectionBuilder(ConnectionBuilder connectionBuilder) {
+        this.connectionBuilder = connectionBuilder;
+    }
+
     public PersonResponse checkPerson(PersonRequest personRequest) throws PersonCheckException {
         PersonResponse personResponse = new PersonResponse();
 
@@ -63,6 +69,6 @@ public class PersonCheckDao {
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/city_register","postgres", "developer");
+        return connectionBuilder.getConnection();
     }
 }
