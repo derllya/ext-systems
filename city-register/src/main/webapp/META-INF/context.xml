@@ -7,7 +7,7 @@
             maxWait="5000"
             name="jdbc/cityRegister"
             username="postgres"
-            password="postgres"
+            password="developer"
             type="javax.sql.DataSource"
             url="jdbc:postgresql://localhost/city_register"
             validationQuery="SELECT 1">

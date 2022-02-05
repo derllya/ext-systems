@@ -91,7 +91,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <outputDirectory>/Users/antonsaburov/java/apache-tomcat-9.0.16/webapps</outputDirectory>
+                    <outputDirectory>C:\Users\derll\TomCat\apache-tomcat-9.0.53\webapps</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
