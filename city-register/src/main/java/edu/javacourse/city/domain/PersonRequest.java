@@ -77,4 +77,18 @@ public class PersonRequest {
     public void setApartment(String apartment) {
         this.apartment = apartment;
     }
+
+    @Override
+    public String toString() {
+        return "PersonRequest{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", birthDay=" + birthDay +
+                ", streetCode=" + streetCode +
+                ", building='" + building + '\'' +
+                ", extension='" + extension + '\'' +
+                ", apartment='" + apartment + '\'' +
+                '}';
+    }
 }

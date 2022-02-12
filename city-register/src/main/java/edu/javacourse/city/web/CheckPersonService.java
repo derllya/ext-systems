@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDate;
 
 @Path("/check")
 @Singleton
@@ -37,7 +38,17 @@ public class CheckPersonService
     }
 
     @GET
-    public String respose(){
-        return "На запрос GET был возвращена эта страница";
+    @Produces(MediaType.APPLICATION_JSON)
+    public PersonRequest respose(){
+        PersonRequest personRequest = new PersonRequest();
+        personRequest.setName("Павел");
+        personRequest.setSurname("Васильев");
+        personRequest.setPatronymic("Николаевич");
+        personRequest.setStreetCode(1);
+        personRequest.setBuilding("10");
+        personRequest.setExtension("2");
+        personRequest.setApartment("121");
+        personRequest.setBirthDay(LocalDate.of(1995,03,18));
+        return personRequest;
     }
 }
