@@ -41,7 +41,7 @@ public class StudentOrderValidator {
         try {
             List<StudentOrder> soList = readStudentOrders();
 
-            for (StudentOrder so : soList) { // присваиваем значение массива объекту и таким образом проходим весь массив
+            for (StudentOrder so : soList) { // присваиваем значение массива - объекту, и таким образом проходим весь массив
                 checkOneOrder(so);
                 System.out.println();
             }

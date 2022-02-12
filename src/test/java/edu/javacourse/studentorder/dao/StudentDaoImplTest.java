@@ -43,10 +43,10 @@ public class StudentDaoImplTest {
         so.setMarriageOffice(registerOffice);
 
         Street street = new Street(1L, "Невский проспект");
-        Address address = new Address("195000", street, "6", "1", "15");
+        Address address = new Address("195000", street, "10", "2", "121");
 
         //Муж
-        Adult husband = new Adult("Василий", "Позен", "Иванович", LocalDate.of(1995,07,30));
+        Adult husband = new Adult("Павел", "Васильев", "Николаевич", LocalDate.of(1995, 3, 18));
         husband.setPassportSerial("" + (1000 + id));
         husband.setPassportNumber("" + (100000 + id));
         husband.setIssueDate(LocalDate.of(2017,9,15));
@@ -57,7 +57,7 @@ public class StudentDaoImplTest {
         husband.setUniversity(new University(2,""));
         husband.setStudentId("HH12345");
         //Жена
-        Adult wife = new Adult("Злата", "Позена", "Петровна", LocalDate.of(1998, 05, 16));
+        Adult wife = new Adult("Ирина", "Васильева", "Петровна", LocalDate.of(1997, 8, 21));
         wife.setPassportSerial("" + (2000 + id));
         wife.setPassportNumber("" + (200000 + id));
         wife.setIssueDate(LocalDate.of(2019,6,13));
@@ -68,14 +68,14 @@ public class StudentDaoImplTest {
         wife.setUniversity(new University(1,""));
         wife.setStudentId("WW12345");
         //Дети
-        Child child1 = new Child("Иван","Позен","Васильевич", LocalDate.of(2020,04,05));
+        Child child1 = new Child("Евгения", "Васильева", "Павловна", LocalDate.of(2016, 1, 11));
         child1.setCertificateNumber("" + (300000 + id));
         child1.setIssueDate(LocalDate.of(2020,02,01));
         RegisterOffice registerOffice2 = new RegisterOffice(2L,"","");
         child1.setIssueDepartment(registerOffice2);
         child1.setAddress(address);
 
-        Child child2 = new Child("Алеша","Позен","Васильевич", LocalDate.of(2021,01,04));
+        Child child2 = new Child("Александр", "Васильев", "Павлович", LocalDate.of(2018, 10, 24));
         child2.setCertificateNumber("" + (400000 + id));
         child2.setIssueDate(LocalDate.of(2021,02,01));
         RegisterOffice registerOffice3 = new RegisterOffice(3L,"","");

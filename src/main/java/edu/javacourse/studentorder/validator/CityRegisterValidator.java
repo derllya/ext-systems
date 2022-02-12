@@ -9,7 +9,7 @@ import edu.javacourse.studentorder.domain.register.CityRegisterResponse;
 import edu.javacourse.studentorder.exception.CityRegisterException;
 import edu.javacourse.studentorder.exception.TransportException;
 import edu.javacourse.studentorder.validator.register.CityRegisterChecker;
-import edu.javacourse.studentorder.validator.register.FakeCityRegisterChecker;
+import edu.javacourse.studentorder.validator.register.RealCityRegisterChecker;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CityRegisterValidator {
     private CityRegisterChecker personChecker;
 
     public CityRegisterValidator() {
-        personChecker = new FakeCityRegisterChecker();
+        personChecker = new RealCityRegisterChecker();
     }
 
     public AnswerCityRegister checkCityRegister(StudentOrder so) {
@@ -43,7 +43,7 @@ public class CityRegisterValidator {
         AnswerCityRegisterItem.CityError error = null;
         try {
             CityRegisterResponse tmp = personChecker.checkPerson(person);
-            status = tmp.isExist() ?
+            status = tmp.isRegistered() ?
                     AnswerCityRegisterItem.CityStatus.YES :
                     AnswerCityRegisterItem.CityStatus.NO;
         } catch (CityRegisterException exception) {
