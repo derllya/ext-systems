@@ -7,7 +7,6 @@ import edu.javacourse.studentorder.domain.register.AnswerCityRegister;
 import edu.javacourse.studentorder.domain.register.AnswerCityRegisterItem;
 import edu.javacourse.studentorder.domain.register.CityRegisterResponse;
 import edu.javacourse.studentorder.exception.CityRegisterException;
-import edu.javacourse.studentorder.exception.TransportException;
 import edu.javacourse.studentorder.validator.register.CityRegisterChecker;
 import edu.javacourse.studentorder.validator.register.RealCityRegisterChecker;
 
@@ -50,10 +49,6 @@ public class CityRegisterValidator {
             exception.printStackTrace(System.out);
             status = AnswerCityRegisterItem.CityStatus.ERROR;
             error = new AnswerCityRegisterItem.CityError(exception.getCode(), exception.getMessage());
-        } catch (TransportException exception) {
-            exception.printStackTrace(System.out);
-            status = AnswerCityRegisterItem.CityStatus.ERROR;
-            error = new AnswerCityRegisterItem.CityError(IN_CODE, exception.getMessage());
         }
         catch (Exception exception){
             exception.printStackTrace(System.out);
