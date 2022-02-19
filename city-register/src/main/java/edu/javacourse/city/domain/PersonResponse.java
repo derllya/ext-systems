@@ -1,22 +1,30 @@
 package edu.javacourse.city.domain;
 
 public class PersonResponse {
-    private boolean isRegistered;
-    private boolean isTemporal;
+    private boolean registered;
+    private boolean temporal;
 
     public boolean isRegistered() {
-        return isRegistered;
+        return registered;
     }
 
     public void setRegistered(boolean registered) {
-        isRegistered = registered;
+        this.registered = registered;
     }
 
     public boolean isTemporal() {
-        return isTemporal;
+        return temporal;
     }
 
     public void setTemporal(boolean temporal) {
-        isTemporal = temporal;
+        this.temporal = temporal;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonResponse{" +
+                "registered=" + registered +
+                ", temporal=" + temporal +
+                '}';
     }
 }

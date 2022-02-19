@@ -1,6 +1,5 @@
 package edu.javacourse.city.dao;
 
-import edu.javacourse.city.web.CheckPersonServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
